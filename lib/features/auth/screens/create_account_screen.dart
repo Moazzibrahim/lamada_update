@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_restaurant/features/auth/domain/models/signup_model.dart';
+import 'package:flutter_restaurant/features/checkout/screens/otp_code_screen.dart';
 import 'package:flutter_restaurant/helper/email_checker_helper.dart';
 import 'package:flutter_restaurant/helper/responsive_helper.dart';
 import 'package:flutter_restaurant/localization/language_constrants.dart';
@@ -37,23 +38,32 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final TextEditingController _numberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final TextEditingController _referTextController = TextEditingController();
   String? _countryDialCode;
 
   @override
   void initState() {
     super.initState();
-    _countryDialCode = CountryCode.fromCountryCode(Provider.of<SplashProvider>(context, listen: false).configModel!.countryCode!).code;
+    _countryDialCode = CountryCode.fromCountryCode(
+            Provider.of<SplashProvider>(context, listen: false)
+                .configModel!
+                .countryCode!)
+        .code;
   }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final config =  Provider.of<SplashProvider>(context, listen: false).configModel;
+    final config =
+        Provider.of<SplashProvider>(context, listen: false).configModel;
 
     return Scaffold(
-      appBar: ResponsiveHelper.isDesktop(context) ? const PreferredSize(preferredSize: Size.fromHeight(100), child: WebAppBarWidget()) : null,
+      appBar: ResponsiveHelper.isDesktop(context)
+          ? const PreferredSize(
+              preferredSize: Size.fromHeight(100), child: WebAppBarWidget())
+          : null,
       body: Consumer<AuthProvider>(
         builder: (context, authProvider, child) => SafeArea(
           child: SingleChildScrollView(
@@ -65,29 +75,50 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   child: Center(
                     child: Container(
                       width: width > 700 ? 700 : width,
-                      padding: width > 700 ? const EdgeInsets.all(Dimensions.paddingSizeDefault) : null,
-                      decoration: width > 700 ? BoxDecoration(
-                        color: Theme.of(context).canvasColor, borderRadius: BorderRadius.circular(10),
-                        boxShadow: [BoxShadow(color: Theme.of(context).shadowColor, blurRadius: 5, spreadRadius: 1)],
-                      ) : null,
+                      padding: width > 700
+                          ? const EdgeInsets.all(Dimensions.paddingSizeDefault)
+                          : null,
+                      decoration: width > 700
+                          ? BoxDecoration(
+                              color: Theme.of(context).canvasColor,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Theme.of(context).shadowColor,
+                                    blurRadius: 5,
+                                    spreadRadius: 1)
+                              ],
+                            )
+                          : null,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Center(
                               child: Text(
                             getTranslated('create_account', context)!,
-                            style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 24, color: ColorResources.getGreyBunkerColor(context)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall!
+                                .copyWith(
+                                    fontSize: 24,
+                                    color: ColorResources.getGreyBunkerColor(
+                                        context)),
                           )),
                           const SizedBox(height: 20),
 
                           // for first name section
                           Text(
                             getTranslated('first_name', context)!,
-                            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getHintColor(context)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(
+                                    color:
+                                        ColorResources.getHintColor(context)),
                           ),
                           const SizedBox(height: Dimensions.paddingSizeSmall),
                           CustomTextFieldWidget(
-                            hintText: 'John',
+                            hintText: '',
                             isShowBorder: true,
                             controller: _firstNameController,
                             focusNode: _firstNameFocus,
@@ -100,12 +131,17 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           // for last name section
                           Text(
                             getTranslated('last_name', context)!,
-                            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getHintColor(context)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(
+                                    color:
+                                        ColorResources.getHintColor(context)),
                           ),
                           const SizedBox(height: Dimensions.paddingSizeSmall),
 
                           CustomTextFieldWidget(
-                            hintText: 'Doe',
+                            hintText: '',
                             isShowBorder: true,
                             controller: _lastNameController,
                             focusNode: _lastNameFocus,
@@ -119,7 +155,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
                           Text(
                             getTranslated('mobile_number', context)!,
-                            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getHintColor(context)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(
+                                    color:
+                                        ColorResources.getHintColor(context)),
                           ),
                           const SizedBox(height: Dimensions.paddingSizeSmall),
 
@@ -133,16 +174,21 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                               showDropDownButton: true,
                               padding: EdgeInsets.zero,
                               showFlagMain: true,
-                              textStyle: TextStyle(color: Theme.of(context).textTheme.displayLarge!.color),
-
+                              textStyle: TextStyle(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .displayLarge!
+                                      .color),
                             ),
-
-                            Expanded(child: CustomTextFieldWidget(
+                            Expanded(
+                                child: CustomTextFieldWidget(
                               hintText: getTranslated('number_hint', context),
                               isShowBorder: true,
                               controller: _numberController,
                               focusNode: _numberFocus,
-                              nextFocus: config!.referEarnStatus! ? _referTextFocus : _passwordFocus,
+                              nextFocus: config!.referEarnStatus!
+                                  ? _referTextFocus
+                                  : _passwordFocus,
                               inputType: TextInputType.phone,
                             )),
                           ]),
@@ -150,7 +196,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
                           Text(
                             getTranslated('email', context)!,
-                            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getHintColor(context)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(
+                                    color:
+                                        ColorResources.getHintColor(context)),
                           ),
                           const SizedBox(height: Dimensions.paddingSizeSmall),
 
@@ -159,36 +210,51 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             isShowBorder: true,
                             controller: _emailController,
                             focusNode: _emailFocus,
-                            nextFocus: config.referEarnStatus! ? _referTextFocus : _passwordFocus,
+                            nextFocus: config.referEarnStatus!
+                                ? _referTextFocus
+                                : _passwordFocus,
                             inputType: TextInputType.emailAddress,
                           ),
                           const SizedBox(height: Dimensions.paddingSizeLarge),
 
                           //refer code
-                          if(config.referEarnStatus!)
-                            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                              Text(
-                                '${ getTranslated('refer_code', context)} (${getTranslated('optional', context)})',
-                                style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getHintColor(context)),
-                              ),
-                              const SizedBox(height: Dimensions.paddingSizeSmall),
-
-                              CustomTextFieldWidget(
-                                hintText: 'lzPUA85HEtxCo6X9N1cV',
-                                isShowBorder: true,
-                                controller: _referTextController,
-                                focusNode: _referTextFocus,
-                                nextFocus: _passwordFocus,
-                                inputType: TextInputType.text,
-                              ),
-                              const SizedBox(height: Dimensions.paddingSizeLarge),
-
-                            ],),
+                          if (config.referEarnStatus!)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${getTranslated('refer_code', context)} (${getTranslated('optional', context)})',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium!
+                                      .copyWith(
+                                          color: ColorResources.getHintColor(
+                                              context)),
+                                ),
+                                const SizedBox(
+                                    height: Dimensions.paddingSizeSmall),
+                                CustomTextFieldWidget(
+                                  hintText: 'lzPUA85HEtxCo6X9N1cV',
+                                  isShowBorder: true,
+                                  controller: _referTextController,
+                                  focusNode: _referTextFocus,
+                                  nextFocus: _passwordFocus,
+                                  inputType: TextInputType.text,
+                                ),
+                                const SizedBox(
+                                    height: Dimensions.paddingSizeLarge),
+                              ],
+                            ),
 
                           // for password section
                           Text(
                             getTranslated('password', context)!,
-                            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getHintColor(context)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(
+                                    color:
+                                        ColorResources.getHintColor(context)),
                           ),
                           const SizedBox(height: Dimensions.paddingSizeSmall),
                           CustomTextFieldWidget(
@@ -205,7 +271,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           // for confirm password section
                           Text(
                             getTranslated('confirm_password', context)!,
-                            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorResources.getHintColor(context)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(
+                                    color:
+                                        ColorResources.getHintColor(context)),
                           ),
                           const SizedBox(height: Dimensions.paddingSizeSmall),
                           CustomTextFieldWidget(
@@ -223,13 +294,19 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               authProvider.registrationErrorMessage!.isNotEmpty
-                                  ? CircleAvatar(backgroundColor: Theme.of(context).primaryColor, radius: 5)
+                                  ? CircleAvatar(
+                                      backgroundColor:
+                                          Theme.of(context).primaryColor,
+                                      radius: 5)
                                   : const SizedBox.shrink(),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
                                   authProvider.registrationErrorMessage ?? "",
-                                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium!
+                                      .copyWith(
                                         fontSize: Dimensions.fontSizeSmall,
                                         color: Theme.of(context).primaryColor,
                                       ),
@@ -244,47 +321,76 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                               ? CustomButtonWidget(
                                   btnTxt: getTranslated('signup', context),
                                   onTap: () async {
-                                    String firstName = _firstNameController.text.trim();
-                                    String lastName = _lastNameController.text.trim();
-                                    String number = _numberController.text.trim();
+                                    String firstName =
+                                        _firstNameController.text.trim();
+                                    String lastName =
+                                        _lastNameController.text.trim();
+                                    String number =
+                                        _numberController.text.trim();
                                     String email = _emailController.text.trim();
-                                    String password = _passwordController.text.trim();
-                                    String confirmPassword = _confirmPasswordController.text.trim();
-
+                                    String password =
+                                        _passwordController.text.trim();
+                                    String confirmPassword =
+                                        _confirmPasswordController.text.trim();
 
                                     if (firstName.isEmpty) {
-                                      showCustomSnackBarHelper(getTranslated('enter_first_name', context));
-                                    }else if (lastName.isEmpty) {
-                                      showCustomSnackBarHelper(getTranslated('enter_last_name', context));
-                                    }else if (number.isEmpty) {
-                                      showCustomSnackBarHelper(getTranslated('enter_phone_number', context));
-                                    }else if (password.isEmpty) {
-                                      showCustomSnackBarHelper(getTranslated('enter_password', context));
-                                    }else if (password.length < 6) {
-                                      showCustomSnackBarHelper(getTranslated('password_should_be', context));
-                                    }else if (confirmPassword.isEmpty) {
-                                      showCustomSnackBarHelper(getTranslated('enter_confirm_password', context));
-                                    }else if(password != confirmPassword) {
-                                      showCustomSnackBarHelper(getTranslated('password_did_not_match', context));
-                                    }else if (email.isEmpty) {
-                                      showCustomSnackBarHelper(getTranslated('enter_email_address', context));
-                                    }else if (EmailCheckerHelper.isNotValid(email)) {
-                                      showCustomSnackBarHelper(getTranslated('enter_valid_email', context));
-                                    }else {
+                                      showCustomSnackBarHelper(getTranslated(
+                                          'enter_first_name', context));
+                                    } else if (lastName.isEmpty) {
+                                      showCustomSnackBarHelper(getTranslated(
+                                          'enter_last_name', context));
+                                    } else if (number.isEmpty) {
+                                      showCustomSnackBarHelper(getTranslated(
+                                          'enter_phone_number', context));
+                                    } else if (password.isEmpty) {
+                                      showCustomSnackBarHelper(getTranslated(
+                                          'enter_password', context));
+                                    } else if (password.length < 6) {
+                                      showCustomSnackBarHelper(getTranslated(
+                                          'password_should_be', context));
+                                    } else if (confirmPassword.isEmpty) {
+                                      showCustomSnackBarHelper(getTranslated(
+                                          'enter_confirm_password', context));
+                                    } else if (password != confirmPassword) {
+                                      showCustomSnackBarHelper(getTranslated(
+                                          'password_did_not_match', context));
+                                    } else if (email.isEmpty) {
+                                      showCustomSnackBarHelper(getTranslated(
+                                          'enter_email_address', context));
+                                    } else if (EmailCheckerHelper.isNotValid(
+                                        email)) {
+                                      showCustomSnackBarHelper(getTranslated(
+                                          'enter_valid_email', context));
+                                    } else if (_numberController
+                                        .text.isNotEmpty) {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ForgetPasswordScreen(
+                                                      controller: number)));
+                                    } else {
                                       SignUpModel signUpModel = SignUpModel(
                                         fName: firstName,
                                         lName: lastName,
                                         email: email,
                                         password: password,
-                                        phone: '${CountryCode.fromCountryCode(_countryDialCode!).dialCode}$number',
-                                        referralCode: _referTextController.text.trim(),
+                                        phone:
+                                            '${CountryCode.fromCountryCode(_countryDialCode!).dialCode}$number',
+                                        referralCode:
+                                            _referTextController.text.trim(),
                                       );
-                                      await authProvider.registration(signUpModel, config).then((status) async {
+                                      await authProvider
+                                          .registration(signUpModel, config)
+                                          .then((status) async {
                                         if (status.isSuccess) {
-                                          RouterHelper.getDashboardRoute('home');
-
-                                        }else if(authProvider.isCheckedPhone && (config.phoneVerification! || config.emailVerification!)){
-                                          RouterHelper.getVerifyRoute('sign-up', '${config.phoneVerification! ?  signUpModel.phone : signUpModel.email}');
+                                          RouterHelper.getDashboardRoute(
+                                              'home');
+                                        } else if (authProvider
+                                                .isCheckedPhone &&
+                                            (config.phoneVerification! ||
+                                                config.emailVerification!)) {
+                                          RouterHelper.getVerifyRoute('sign-up',
+                                              '${config.phoneVerification! ? signUpModel.phone : signUpModel.email}');
                                         }
                                       });
                                     }
@@ -292,29 +398,43 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                 )
                               : Center(
                                   child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Theme.of(context).primaryColor),
                                 )),
 
                           // for already an account
                           const SizedBox(height: 11),
                           InkWell(
-                            onTap: ()=> RouterHelper.getLoginRoute(action: RouteAction.pushReplacement),
+                            onTap: () => RouterHelper.getLoginRoute(
+                                action: RouteAction.pushReplacement),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    getTranslated('already_have_account', context)!,
-                                    style: Theme.of(context).textTheme.displayMedium!.copyWith(fontSize: Dimensions.fontSizeSmall, color: Theme.of(context).hintColor.withOpacity(0.7)),
+                                    getTranslated(
+                                        'already_have_account', context)!,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayMedium!
+                                        .copyWith(
+                                            fontSize: Dimensions.fontSizeSmall,
+                                            color: Theme.of(context)
+                                                .hintColor
+                                                .withOpacity(0.7)),
                                   ),
-                                  const SizedBox(width: Dimensions.paddingSizeSmall),
+                                  const SizedBox(
+                                      width: Dimensions.paddingSizeSmall),
                                   Text(
                                     getTranslated('login', context)!,
                                     style: Theme.of(context)
                                         .textTheme
                                         .displaySmall!
-                                        .copyWith(fontSize: Dimensions.fontSizeSmall, color: ColorResources.getGreyBunkerColor(context)),
+                                        .copyWith(
+                                            fontSize: Dimensions.fontSizeSmall,
+                                            color: ColorResources
+                                                .getGreyBunkerColor(context)),
                                   ),
                                 ],
                               ),
@@ -325,7 +445,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     ),
                   ),
                 ),
-                if(ResponsiveHelper.isDesktop(context)) const FooterWidget(),
+                if (ResponsiveHelper.isDesktop(context)) const FooterWidget(),
               ],
             ),
           ),
