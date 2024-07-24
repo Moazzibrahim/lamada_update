@@ -164,7 +164,7 @@
   "dark_theme": "موضوع مظلم",
   "payment_cancelled": "تم إلغاء الدفع",
   "order_failed": "فشل الطلب",
-  "PAYMENT": "قسط",
+  "PAYMENT": "دفع",
   "no_order_history": "لا يوجد تاريخ أمر",
   "you_havent_made_any_purchase_yet": "لقد قمت بأي عملية شراء حتى الآن",
   "empty_cart": "عربة فارغة",

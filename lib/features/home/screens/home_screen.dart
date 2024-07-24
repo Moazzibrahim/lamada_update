@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_restaurant/common/providers/product_provider.dart';
 import 'package:flutter_restaurant/common/widgets/branch_button_widget.dart';
-import 'package:flutter_restaurant/common/widgets/branch_list_widget.dart';
 import 'package:flutter_restaurant/common/widgets/custom_asset_image_widget.dart';
 import 'package:flutter_restaurant/common/widgets/custom_pop_scope_widget.dart';
 import 'package:flutter_restaurant/common/widgets/customizable_space_bar_widget.dart';

@@ -10,7 +10,6 @@ import 'package:flutter_restaurant/utill/color_resources.dart';
 import 'package:flutter_restaurant/utill/dimensions.dart';
 import 'package:flutter_restaurant/utill/images.dart';
 import 'package:flutter_restaurant/helper/router_helper.dart';
-import 'package:flutter_restaurant/utill/styles.dart';
 import 'package:flutter_restaurant/common/widgets/custom_button_widget.dart';
 import 'package:flutter_restaurant/helper/custom_snackbar_helper.dart';
 import 'package:flutter_restaurant/common/widgets/custom_text_field_widget.dart';
@@ -331,19 +330,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             if(socialStatus!.isFacebook! || socialStatus.isGoogle!)
                               const Center(child: SocialLoginWidget()),
 
-                            Center(child: Text(getTranslated('OR', context)!, style: poppinsRegular.copyWith(fontSize: 12))),
+                            // Center(child: Text(getTranslated('OR', context)!, style: poppinsRegular.copyWith(fontSize: 12))),
 
-                            Center(
-                              child: InkWell(
-                                onTap: () {
-                                  RouterHelper.getDashboardRoute('home', );
-                                },
-                                child: RichText(text: TextSpan(children: [
-                                  TextSpan(text: '${getTranslated('continue_as_a', context)} ',  style: poppinsRegular.copyWith(fontSize: Dimensions.fontSizeSmall, color: ColorResources.getHintColor(context))),
-                                  TextSpan(text: getTranslated('guest', context), style: poppinsRegular.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color)),
-                                ])),
-                              ),
-                            ),
+                            // Center(
+                            //   child: InkWell(
+                            //     onTap: () {
+                            //       RouterHelper.getDashboardRoute('home', );
+                            //     },
+                            //     child: RichText(text: TextSpan(children: [
+                            //       TextSpan(text: '${getTranslated('continue_as_a', context)} ',  style: poppinsRegular.copyWith(fontSize: Dimensions.fontSizeSmall, color: ColorResources.getHintColor(context))),
+                            //       TextSpan(text: getTranslated('guest', context), style: poppinsRegular.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color)),
+                            //     ])),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
