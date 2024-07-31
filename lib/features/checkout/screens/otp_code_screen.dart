@@ -60,7 +60,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               getTranslated('registration_successful', Get.context!),
               isError: false);
         } else {
-          throw Exception(responseBody['message'] ?? 'Failed to verify OTP');
+          throw Exception(responseBody['faild'] ?? 'Failed to verify OTP');
         }
       } else {
         throw Exception(
