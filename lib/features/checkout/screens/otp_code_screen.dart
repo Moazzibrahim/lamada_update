@@ -8,7 +8,6 @@ import 'package:pinput/pinput.dart';
 
 import 'package:flutter_restaurant/features/auth/screens/login_screen.dart';
 import 'package:flutter_restaurant/helper/custom_snackbar_helper.dart';
-import 'package:flutter_restaurant/helper/router_helper.dart';
 import 'package:flutter_restaurant/localization/language_constrants.dart';
 import 'package:flutter_restaurant/main.dart';
 
@@ -51,14 +50,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
       if (response.statusCode == 200) {
         final responseBody = jsonDecode(response.body);
-        if (responseBody['success'] == true) {
+        if (responseBody['success'] == "Otp Is Done") {
           print("OTP verification successful");
 
-          RouterHelper.getDashboardRoute('home',
-              action: RouteAction.pushNamedAndRemoveUntil);
+          // RouterHelper.getDashboardRoute('home',
+          //     action: RouteAction.pushNamedAndRemoveUntil);
           showCustomSnackBarHelper(
               getTranslated('registration_successful', Get.context!),
               isError: false);
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => LoginScreen()));
         } else {
           throw Exception(responseBody['faild'] ?? 'Failed to verify OTP');
         }

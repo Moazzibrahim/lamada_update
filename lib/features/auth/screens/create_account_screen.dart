@@ -316,7 +316,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           ),
 
                           // for signup button
-                          const SizedBox(height: 10),
                           !authProvider.isLoading
                               ? CustomButtonWidget(
                                   btnTxt: getTranslated('signup', context),
@@ -361,36 +360,44 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                         email)) {
                                       showCustomSnackBarHelper(getTranslated(
                                           'enter_valid_email', context));
-                                    } else if (_numberController
-                                        .text.isNotEmpty) {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ForgetPasswordScreen(
-                                                      controller: number)));
                                     } else {
                                       SignUpModel signUpModel = SignUpModel(
                                         fName: firstName,
                                         lName: lastName,
                                         email: email,
                                         password: password,
-                                        phone:
-                                            '${CountryCode.fromCountryCode(_countryDialCode!).dialCode}$number',
+                                        phone: number,
                                         referralCode:
                                             _referTextController.text.trim(),
                                       );
+
                                       await authProvider
                                           .registration(signUpModel, config)
                                           .then((status) async {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ForgetPasswordScreen(
+                                                        controller: number)));
                                         if (status.isSuccess) {
-                                          RouterHelper.getDashboardRoute(
-                                              'home');
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                            builder: (context) =>
+                                                ForgetPasswordScreen(
+                                                    controller: number),
+                                          ));
                                         } else if (authProvider
                                                 .isCheckedPhone &&
                                             (config.phoneVerification! ||
                                                 config.emailVerification!)) {
                                           RouterHelper.getVerifyRoute('sign-up',
                                               '${config.phoneVerification! ? signUpModel.phone : signUpModel.email}');
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                            builder: (context) =>
+                                                ForgetPasswordScreen(
+                                                    controller: number),
+                                          ));
                                         }
                                       });
                                     }
@@ -398,9 +405,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                 )
                               : Center(
                                   child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                      Theme.of(context).primaryColor),
-                                )),
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Theme.of(context).primaryColor),
+                                  ),
+                                ),
 
                           // for already an account
                           const SizedBox(height: 11),

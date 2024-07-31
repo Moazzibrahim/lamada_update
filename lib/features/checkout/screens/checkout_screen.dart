@@ -200,7 +200,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                     height: Dimensions
                                                         .paddingSizeDefault),
 
-                                                /// for Time Slot
+                                                // / for Time Slot
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     color: Theme.of(context)

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, deprecated_member_use
+
 import 'dart:async';
 
 import 'package:dio/dio.dart';
@@ -17,18 +19,24 @@ class AuthRepo {
   final SharedPreferences? sharedPreferences;
 
   AuthRepo({required this.dioClient, required this.sharedPreferences});
-
-  Future<ApiResponseModel> registration(SignUpModel signUpModel) async {
-    try {
-      Response response = await dioClient!.post(
-        AppConstants.registerUri,
-        data: signUpModel.toJson(),
-      );
-      return ApiResponseModel.withSuccess(response);
-    } catch (e) {
-      return ApiResponseModel.withError(ApiErrorHandler.getMessage(e));
+Future<ApiResponseModel> registration(SignUpModel signUpModel) async {
+  try {
+    Response response = await dioClient!.post(
+      AppConstants.registerUri,
+      data: signUpModel.toJson(),
+    );
+    print('Response: ${response.data}');
+    print('Status Code: ${response.statusCode}');
+    return ApiResponseModel.withSuccess(response);
+  } catch (e) {
+    print('Error: ${ApiErrorHandler.getMessage(e)}');
+    if (e is DioError && e.response != null) {
+      print('Status Code: ${e.response?.statusCode}');
+      print('Response: ${e.response?.data}');
     }
+    return ApiResponseModel.withError(ApiErrorHandler.getMessage(e));
   }
+}
 
   Future<ApiResponseModel> login({String? email, String? password}) async {
     try {
