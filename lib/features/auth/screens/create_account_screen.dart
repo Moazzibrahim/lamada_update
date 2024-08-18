@@ -366,7 +366,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                         lName: lastName,
                                         email: email,
                                         password: password,
-                                        phone: number,
+                                        phone: "+20$number",
                                         referralCode:
                                             _referTextController.text.trim(),
                                       );
@@ -378,13 +378,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     ForgetPasswordScreen(
-                                                        controller: number)));
+                                                        controller: "+20$number")));
                                         if (status.isSuccess) {
                                           Navigator.of(context)
                                               .push(MaterialPageRoute(
                                             builder: (context) =>
                                                 ForgetPasswordScreen(
-                                                    controller: number),
+                                                    controller: "+20$number"),
                                           ));
                                         } else if (authProvider
                                                 .isCheckedPhone &&

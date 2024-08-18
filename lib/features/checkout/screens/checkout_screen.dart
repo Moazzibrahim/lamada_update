@@ -1,6 +1,7 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_restaurant/common/models/cart_model.dart';
@@ -301,47 +302,59 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                             height: Dimensions
                                                                 .paddingSizeSmall),
                                                         SizedBox(
-                                                          height: 40,
-                                                          child: checkoutProvider
-                                                                      .timeSlots !=
-                                                                  null
-                                                              ? checkoutProvider
+                                                            height: 40,
+                                                            child:
+                                                                // checkoutProvider
+                                                                //             .timeSlots !=
+                                                                //         null
+                                                                //     ? checkoutProvider
+                                                                //             .timeSlots!
+                                                                //             .isNotEmpty
+                                                                //         ?
+                                                                ListView
+                                                                    .builder(
+                                                              scrollDirection:
+                                                                  Axis.horizontal,
+                                                              shrinkWrap: true,
+                                                              physics:
+                                                                  const BouncingScrollPhysics(),
+                                                              itemCount:
+                                                                  checkoutProvider
                                                                       .timeSlots!
-                                                                      .isNotEmpty
-                                                                  ? ListView
-                                                                      .builder(
-                                                                      scrollDirection:
-                                                                          Axis.horizontal,
-                                                                      shrinkWrap:
-                                                                          true,
-                                                                      physics:
-                                                                          const BouncingScrollPhysics(),
-                                                                      itemCount: checkoutProvider
-                                                                          .timeSlots!
-                                                                          .length,
-                                                                      itemBuilder:
-                                                                          (context,
-                                                                              index) {
-                                                                        return SlotWidget(
-                                                                          title: (index == 0 && checkoutProvider.selectDateSlot == 0 && splashProvider.isRestaurantOpenNow(context))
-                                                                              ? getTranslated('asap', context)
-                                                                              : '${DateConverterHelper.dateToTimeOnly(checkoutProvider.timeSlots![index].startTime!, context)} '
-                                                                                  '- ${DateConverterHelper.dateToTimeOnly(checkoutProvider.timeSlots![index].endTime!, context)}',
-                                                                          isSelected:
-                                                                              checkoutProvider.selectTimeSlot == index,
-                                                                          onTap: () =>
-                                                                              checkoutProvider.updateTimeSlot(index),
-                                                                        );
-                                                                      },
-                                                                    )
-                                                                  : Center(
-                                                                      child: Text(getTranslated(
-                                                                          'no_slot_available',
-                                                                          context)!))
-                                                              : const Center(
-                                                                  child:
-                                                                      CircularProgressIndicator()),
-                                                        ),
+                                                                      .length,
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      index) {
+                                                                return SlotWidget(
+                                                                  title: (index == 0 &&
+                                                                          checkoutProvider.selectDateSlot ==
+                                                                              0 &&
+                                                                          splashProvider.isRestaurantOpenNow(
+                                                                              context))
+                                                                      ? getTranslated(
+                                                                          'asap',
+                                                                          context)
+                                                                      : '${DateConverterHelper.dateToTimeOnly(checkoutProvider.timeSlots![index].startTime!, context)} '
+                                                                          '- ${DateConverterHelper.dateToTimeOnly(checkoutProvider.timeSlots![index].endTime!, context)}',
+                                                                  isSelected:
+                                                                      checkoutProvider
+                                                                              .selectTimeSlot ==
+                                                                          index,
+                                                                  onTap: () =>
+                                                                      checkoutProvider
+                                                                          .updateTimeSlot(
+                                                                              index),
+                                                                );
+                                                              },
+                                                            )
+                                                            // : Center(
+                                                            //     child: Text(getTranslated(
+                                                            //         'no_slot_available',
+                                                            //         context)!))
+                                                            // : const Center(
+                                                            //     child:
+                                                            //         CircularProgressIndicator()),
+                                                            ),
                                                       ]),
                                                 ),
                                                 const SizedBox(

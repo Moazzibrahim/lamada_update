@@ -100,21 +100,10 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                             ? '${splashProvider.baseUrls!.categoryImageUrl}/${widget.categoryProvider.categoryList![currentIndex0].image}' : '',
                       ),
                     );
-                  }) : Container(
-                    padding: const EdgeInsets.all(Dimensions.paddingSizeDefault),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
-                      color: Theme.of(context).cardColor.withOpacity(0.5),
-                      boxShadow: [BoxShadow(
-                        color: Theme.of(context).shadowColor.withOpacity(0.2),
-                        spreadRadius: Dimensions.radiusSmall, blurRadius: Dimensions.radiusLarge,
-                      )],
-                    ),
-                    child: CustomImageWidget(
-                      height: 45, width: 45,
-                      image: splashProvider.baseUrls != null
-                          ? '${splashProvider.baseUrls!.categoryImageUrl}/${widget.categoryProvider.categoryList![currentIndex0].image}' : '',
-                    ),
+                  }) : CustomImageWidget(
+                    height: 55, width: 55,
+                    image: splashProvider.baseUrls != null
+                        ? '${splashProvider.baseUrls!.categoryImageUrl}/${widget.categoryProvider.categoryList![currentIndex0].image}' : '',
                   ),
                 ),
                 const SizedBox(height: Dimensions.paddingSizeExtraSmall),
