@@ -1,3 +1,5 @@
+// ignore_for_file: unused_shown_name
+
 import 'dart:async';
 import 'dart:io';
 import 'package:app_links/app_links.dart';
@@ -261,22 +263,19 @@ class _MyAppState extends State<MyApp> {
           // Define the start and end times
           final closingTime =
               DateTime(now.year, now.month, now.day, 3, 30); // 3:30 AM
-          final openingTime = DateTime(
-            now.year,
-            now.month,
-            now.day,
-            10,
-          ); // 10:00 AM
+          final openingTime =
+              DateTime(now.year, now.month, now.day, 10); // 10:00 AM
 
-          // Adjust the closingTime to handle the case where it's after midnight
-          final closingTimeAdjusted = now.isBefore(closingTime)
-              ? closingTime.subtract(const Duration(days: 1))
-              : closingTime;
+          // If now is after midnight but before the closing time (e.g., 1:00 AM)
+          if (now.isBefore(closingTime)) {
+            return false; //opened
+          }
 
-          // Check if the current time is within the closed hours
-          if (now.isAfter(closingTimeAdjusted) && now.isBefore(openingTime)) {
+          // If now is after the closing time and before the opening time
+          if (now.isAfter(closingTime) && now.isBefore(openingTime)) {
             return true; // Closed
           }
+
           return false; // Open
         }
 
