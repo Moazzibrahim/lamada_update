@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, unused_local_variable, unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_restaurant/common/widgets/custom_asset_image_widget.dart';
@@ -145,92 +147,92 @@ class _CouponAddWidgetState extends State<CouponAddWidget> {
           );
         },
       ),
-      const SizedBox(height: Dimensions.paddingSizeLarge),
+      // const SizedBox(height: Dimensions.paddingSizeLarge),
 
-      Expanded(
-        child: Consumer<CouponProvider>(
-          builder: (context, coupon, child) {
-            return coupon.couponList == null ? _CouponShimmerWidget(isEnabled: couponProvider.couponList == null) :
-            (coupon.couponList?.isNotEmpty ?? false) ? RefreshIndicator(
-              onRefresh: () async {
-                await couponProvider.getCouponList();
-              },
-              backgroundColor: Theme.of(context).primaryColor,
-              color: Theme.of(context).cardColor,
-              child: SingleChildScrollView(child: Column(children: [
+      // Expanded(
+      //   child: Consumer<CouponProvider>(
+      //     builder: (context, coupon, child) {
+      //       return coupon.couponList == null ? _CouponShimmerWidget(isEnabled: couponProvider.couponList == null) :
+      //       (coupon.couponList?.isNotEmpty ?? false) ? RefreshIndicator(
+      //         onRefresh: () async {
+      //           await couponProvider.getCouponList();
+      //         },
+      //         backgroundColor: Theme.of(context).primaryColor,
+      //         color: Theme.of(context).cardColor,
+      //         child: SingleChildScrollView(child: Column(children: [
 
-                Center(child: ListView.builder(
-                  itemCount: coupon.couponList!.length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Padding(padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeLarge), child: InkWell(
-                      onTap: () {
-                        Clipboard.setData(ClipboardData(text: coupon.couponList![index].code ?? ''));
-                        widget._couponController.text = coupon.couponList![index].code ?? '';
-                        showCustomSnackBarHelper(getTranslated('coupon_code_copied', context), isError:  false);
-                      },
-                      child: Container(
-                        height: 85,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: ColorResources.getSecondaryColor(context).withOpacity(0.05),
-                          border: Border.all(color: ColorResources.getSecondaryColor(context).withOpacity(0.3)),
-                          borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
-                        ),
-                        padding: const EdgeInsets.all(Dimensions.paddingSizeSmall),
-                        child: Row(children: [
+      //           Center(child: ListView.builder(
+      //             itemCount: coupon.couponList!.length,
+      //             shrinkWrap: true,
+      //             physics: const NeverScrollableScrollPhysics(),
+      //             itemBuilder: (context, index) {
+      //               return Padding(padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeLarge), child: InkWell(
+      //                 onTap: () {
+      //                   Clipboard.setData(ClipboardData(text: coupon.couponList![index].code ?? ''));
+      //                   widget._couponController.text = coupon.couponList![index].code ?? '';
+      //                   showCustomSnackBarHelper(getTranslated('coupon_code_copied', context), isError:  false);
+      //                 },
+      //                 child: Container(
+      //                   height: 85,
+      //                   alignment: Alignment.center,
+      //                   decoration: BoxDecoration(
+      //                     color: ColorResources.getSecondaryColor(context).withOpacity(0.05),
+      //                     border: Border.all(color: ColorResources.getSecondaryColor(context).withOpacity(0.3)),
+      //                     borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
+      //                   ),
+      //                   padding: const EdgeInsets.all(Dimensions.paddingSizeSmall),
+      //                   child: Row(children: [
 
-                          const CustomAssetImageWidget(Images.applyPromo, height: 35, width: 35),
-                          const SizedBox(width: Dimensions.paddingSizeDefault),
+      //                     const CustomAssetImageWidget(Images.applyPromo, height: 35, width: 35),
+      //                     const SizedBox(width: Dimensions.paddingSizeDefault),
 
-                          Expanded(
-                            child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
-                              SelectableText(
-                                coupon.couponList![index].code!,
-                                style: rubikRegular.copyWith(),
-                              ),
-                              const SizedBox(height: Dimensions.paddingSizeExtraSmall),
-                              Text(
-                                '${coupon.couponList![index].discount}${coupon.couponList![index].discountType == 'percent' ? '%'
-                                    : splashProvider.configModel!.currencySymbol} off',
-                                style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeExtraSmall),
-                              ),
-                              const SizedBox(height: Dimensions.paddingSizeExtraSmall),
-                              Text(
-                                '${getTranslated('valid_until', context)} ${DateConverterHelper.isoStringToLocalDateOnly(coupon.couponList![index].expireDate!)}',
-                                style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeExtraSmall),
-                              ),
-                            ]),
-                          ),
+      //                     Expanded(
+      //                       child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
+      //                         SelectableText(
+      //                           coupon.couponList![index].code!,
+      //                           style: rubikRegular.copyWith(),
+      //                         ),
+      //                         const SizedBox(height: Dimensions.paddingSizeExtraSmall),
+      //                         Text(
+      //                           '${coupon.couponList![index].discount}${coupon.couponList![index].discountType == 'percent' ? '%'
+      //                               : splashProvider.configModel!.currencySymbol} off',
+      //                           style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeExtraSmall),
+      //                         ),
+      //                         const SizedBox(height: Dimensions.paddingSizeExtraSmall),
+      //                         Text(
+      //                           '${getTranslated('valid_until', context)} ${DateConverterHelper.isoStringToLocalDateOnly(coupon.couponList![index].expireDate!)}',
+      //                           style: rubikRegular.copyWith(fontSize: Dimensions.fontSizeExtraSmall),
+      //                         ),
+      //                       ]),
+      //                     ),
 
-                        ]),
-                      ),
-                    ));
-                  },
-                )),
+      //                   ]),
+      //                 ),
+      //               ));
+      //             },
+      //           )),
 
-              ])),
-            ) : Column(children: [
-              const SizedBox(height: Dimensions.paddingSizeExtraLarge),
-              SizedBox(
-                height: size.height * 0.2, width: size.width * 0.2,
-                child: const CustomAssetImageWidget(
-                  Images.noCouponSvg,
-                  fit: BoxFit.contain,
-                ),
-              ),
-              const SizedBox(height: Dimensions.paddingSizeExtraLarge),
+      //         ])),
+      //       ) : Column(children: [
+      //         const SizedBox(height: Dimensions.paddingSizeExtraLarge),
+      //         SizedBox(
+      //           height: size.height * 0.2, width: size.width * 0.2,
+      //           child: const CustomAssetImageWidget(
+      //             Images.noCouponSvg,
+      //             fit: BoxFit.contain,
+      //           ),
+      //         ),
+      //         const SizedBox(height: Dimensions.paddingSizeExtraLarge),
 
-              Text(
-                getTranslated('no_promo_available', context)!,
-                style: rubikMedium.copyWith(color: Theme.of(context).textTheme.bodyLarge?.color, fontSize: Dimensions.fontSizeLarge),
-                textAlign: TextAlign.center,
-              ),
-            ]);
-          },
-        ),
-      ),
+      //         Text(
+      //           getTranslated('no_promo_available', context)!,
+      //           style: rubikMedium.copyWith(color: Theme.of(context).textTheme.bodyLarge?.color, fontSize: Dimensions.fontSizeLarge),
+      //           textAlign: TextAlign.center,
+      //         ),
+      //       ]);
+      //     },
+      //   ),
+      // ),
 
     ]));
   }

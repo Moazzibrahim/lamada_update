@@ -85,7 +85,7 @@ class OptionsWidget extends StatelessWidget {
                 if(!kIsWeb) PortionWidget(imageIcon: Images.scanner, title: getTranslated('qr_scan', context)!, onRoute:()=> Get.navigator!.push(MaterialPageRoute(builder: (context) => const ScannerScreen()))),
                 PortionWidget(imageIcon: Images.addressSvg, title: getTranslated('address', context)!, onRoute:()=> RouterHelper.getAddressRoute()),
                 PortionWidget(imageIcon: Images.messageSvg, title: getTranslated('message', context)!, onRoute:()=> RouterHelper.getChatRoute()),
-                PortionWidget(imageIcon: Images.couponSvg, title: getTranslated('coupon', context)!, onRoute:()=> RouterHelper.getCouponRoute()),
+                // PortionWidget(imageIcon: Images.couponSvg, title: getTranslated('coupon', context)!, onRoute:()=> RouterHelper.getCouponRoute()),
                 PortionWidget(imageIcon: Images.usersSvg, title: getTranslated('refer_and_earn', context)!, onRoute:()=> RouterHelper.getReferAndEarnRoute()),
                 PortionWidget(imageIcon: Images.languageSvg, title: getTranslated('language', context)!, onRoute:()=> RouterHelper.getLanguageRoute(true), hideDivider: true),
               ]),
